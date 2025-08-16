@@ -3,8 +3,8 @@
 import React from 'react'
 const ProductCard = () => {
   return (
-    <div>
-        <button onClick={()=> console.log('click')}>Add</button>
+    <div >
+        <button className='btn btn-primary' onClick={()=> console.log('click')}>Add</button>
     </div>
   )
 }

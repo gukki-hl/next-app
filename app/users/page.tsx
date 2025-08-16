@@ -4,6 +4,7 @@ interface User {
   id: number;
   name: string;
   username: string;
+  email: string;
 }
 /*
 在Next中 App Router 中，页面组件默认是服务器组件。可以直接是异步函数
@@ -15,19 +16,27 @@ interface User {
   浏览器接受到就是完整HTML，不需要再进行数据获取。对于SEO友好。
 */
 const user = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users",{
-    next: { revalidate: 10 }, //每10秒重新验证数据
-    cache: "no-store", //不使用缓存
-  });
+  const res = await fetch("https://jsonplaceholder.typicode.com/users")
   const users: User[] = await res.json();
   return (
     <>
       <h2>i am gukki</h2>
-      <ul>
-        {users.map((user: User) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user: User) => (
+            <tr key={user.id}>
+              <td> {user.name}</td>
+              <td>{user.email}</td>
+             </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
