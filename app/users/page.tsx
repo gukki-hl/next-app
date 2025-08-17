@@ -1,42 +1,28 @@
-import React from "react";
-//定义用户类型接口
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
+import React, { Suspense } from "react";
+import UserTable from "./UserTable";
+import Link from "next/link";
+
+interface Props {
+  searchParams: {
+    sortOrder?: string;
+  };
 }
-/*
-在Next中 App Router 中，页面组件默认是服务器组件。可以直接是异步函数
-这里使用了SSR(服务器渲染)获取数据
-  1，直接在组件中使用fetch获取数据，无需useEffect
-  因为组件在服务器渲染时会执行async函数。
-  2，不需要useState储存数据，数据直接在渲染时使用。
-  3，返回的JSX会被渲染成HTML，再发送到浏览器
-  浏览器接受到就是完整HTML，不需要再进行数据获取。对于SEO友好。
-*/
-const user = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users")
-  const users: User[] = await res.json();
+//路由查询参数
+//page.tsx文件中可以获取路由查询参数.自动接收一个searchParams参数(next.js注入)
+//可以通过searchParams获取查询参数，直接解构拿到即可
+//如果有sortOrder参数,则传递给UserTable组件进行排序
+//如果没有sortOrder参数,则不进行排序
+
+const user = async ({ searchParams: { sortOrder } }: Props) => {
+  console.log("sortOrder", sortOrder);
+  
   return (
     <>
-      <h2>i am gukki</h2>
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user: User) => (
-            <tr key={user.id}>
-              <td> {user.name}</td>
-              <td>{user.email}</td>
-             </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1>Users</h1>
+      <Link href="/users/new" className="btn mb-5">
+        new user
+      </Link>
+      <UserTable sortOrder={sortOrder} />
     </>
   );
 };

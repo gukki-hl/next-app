@@ -16,6 +16,7 @@
     "autoprefixer": "^10.4.19",
     "eslint": "9.33.0",
     "eslint-config-next": "15.4.6",
+    "fast-sort": "^3.4.1",
     "next": "15.4.6",
     "postcss": "^8.4.35",
     "react": "19.1.1",
