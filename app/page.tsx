@@ -8,7 +8,7 @@ export default async function Home() {
     <main className="relative h-screen">
       <h1>hello {session && <span>{session.user?.name}</span>}</h1>
       <ProductCard />
-      <Image
+      {/* <Image
         src="https://assets.imgix.net/blog/unsplash-kiss.jpg"
         alt="Test image"
         fill
@@ -17,7 +17,7 @@ export default async function Home() {
         unoptimized
         quality={100}
         priority
-      ></Image>
+      ></Image> */}
     </main>
   );
 }
