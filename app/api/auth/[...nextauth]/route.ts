@@ -2,8 +2,10 @@
 process.env.GLOBAL_AGENT_HTTP_PROXY = "http://127.0.0.1:7890";
 process.env.GLOBAL_AGENT_HTTPS_PROXY = "http://127.0.0.1:7890";
 
-import "global-agent/bootstrap";
-
+if (typeof window === "undefined") {
+  // 只在 Node.js 运行时导入
+  require("global-agent/bootstrap");
+}
 export const runtime = "nodejs";
 
 import NextAuth, { NextAuthOptions } from "next-auth";

@@ -15,10 +15,13 @@ const NavBar = () => {
         <Link href="/components">Componement</Link>
         {status === "authenticated" && (
           <div>
-            {session.user?.name}
-            <Link href="/api/auth/signout" className="ml-10">
-              SignOut
-            </Link>
+            {session.user?.name ? (
+              <Link href="/api/auth/signout" className="ml-10">
+                SignOut
+              </Link>
+            ) : (
+              <Link href="/api/auth/signin">Login</Link>
+            )}
           </div>
         )}
         {status === "unauthenticated" && (
